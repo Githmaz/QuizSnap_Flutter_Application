@@ -61,15 +61,15 @@ class _QuizState extends State<Dashboard> {
         currentPage = const Text("404 - Page Not found"); // Handle unknown pagxe
         break;
     }
-
-    return MaterialApp(
+    
+  return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.white, Colors.blue.shade400],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/home_page_background.png'),
+              fit: BoxFit.cover,
             ),
           ),
           child: currentPage,
