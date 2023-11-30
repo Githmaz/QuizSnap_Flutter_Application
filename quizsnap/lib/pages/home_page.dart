@@ -57,6 +57,9 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               onAction('quiz');
             },
+            side: "left",
+            width: 150,
+            buttonColor: Colors.blue,
           ),
         ],
       ),

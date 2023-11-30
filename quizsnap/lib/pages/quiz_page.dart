@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quizsnap/widgets/answer_button_widget.dart';
 import 'package:quizsnap/data/questions.dart';
 
+import '../widgets/parallelogram_button.dart';
+
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key, required this.onAnswer, required this.onAction});
 
@@ -25,7 +27,6 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -37,24 +38,36 @@ class _QuizPageState extends State<QuizPage> {
               textAlign: TextAlign.center,
               style: const TextStyle(color: Colors.white, fontSize: 28),
             ),
-            ...questions[currentQuestionIndex]
-                .getRandomAnswers()
-                .map((answer) => AnswerButton(
-                    value: answer,
-                    onAnswer: () {
-                      answerQuestion(answer);
-                    })),
             const SizedBox(
               height: 40,
             ),
-            TextButton(
-                onPressed: () {
-                  widget.onAction('home');
-                },
-                child: const Text(
-                  'Back to Start',
-                  style: TextStyle(fontSize: 18, color: Colors.amber),
-                ))
+            ...questions[currentQuestionIndex]
+                .getRandomAnswers()
+                .map((answer) => [
+                      AnswerButton(
+                        value: answer,
+                        onAnswer: () {
+                          answerQuestion(answer);
+                        },
+                        buttonColor: Colors.blue,
+                      ),
+                      const SizedBox(
+                          height:
+                              10), // Adjust the spacing between AnswerButtons
+                    ])
+                .expand((element) => element),
+            const SizedBox(
+              height: 40,
+            ),
+            ParallelogramButton(
+              label: 'Back to Start',
+              onPressed: () {
+                widget.onAction('home');
+              },
+              side: "left",
+              width: 180,
+              buttonColor: const Color.fromARGB(255, 82, 78, 78),
+            ),
           ],
         ),
       ),

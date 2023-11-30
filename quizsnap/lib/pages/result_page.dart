@@ -37,7 +37,7 @@ class ResultPage extends StatelessWidget {
               .map((s) => Text(((s['questionIndex'] as int) + 1).toString())),
           OutlinedButton(
               onPressed: () {
-                onAction('start');
+                onAction('home');
               },
               child: const Text('Restart'))
         ],
