@@ -15,7 +15,7 @@ class QuizPage extends StatefulWidget {
 
   final Function(String value) onAnswer;
   final Function(String value) onBackToHome;
-  final Function(String value) onTryAgian;
+  final Function onTryAgian;
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -26,14 +26,14 @@ class _QuizPageState extends State<QuizPage> {
 
   void answerQuestion(String answer) {
     widget.onAnswer(answer);
-    setState(() {
-      currentQuestionIndex++;
-    });
+    currentQuestionIndex++;
+    setState(() {});
   }
 
   void restartQuiz() {
+    currentQuestionIndex = 0;
     setState(() {
-      currentQuestionIndex = 0;
+      widget.onTryAgian();
     });
   }
 
@@ -86,14 +86,15 @@ class _QuizPageState extends State<QuizPage> {
                           ? showDialog(
                               context: context,
                               builder: (context) => CustomAlertDialog(
-                                  type: "Yes",
-                                  alertTitle: "Confirm Navigation",
-                                  alertContent:
-                                      "Are you sure you want to go back to the home screen? Your progress will be lost.",
-                                  yesButton: () {
-                                    restartQuiz();
-                                    widget.onBackToHome('home');
-                                  }),
+                                type: "Yes",
+                                alertTitle: "Confirm Navigation",
+                                alertContent:
+                                    "Are you sure you want to go back to the home screen? Your progress will be lost.",
+                                yesButton: () {
+                                  restartQuiz();
+                                  widget.onBackToHome('home');
+                                },
+                              ),
                             )
                           : widget.onBackToHome('home');
                     },

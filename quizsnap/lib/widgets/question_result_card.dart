@@ -28,7 +28,7 @@ class QuestionResultCard extends StatelessWidget {
               ),
             ),
           ),
-          
+
           // User's Answer
           ListTile(
             leading: result.userAsnwerIsCorrect

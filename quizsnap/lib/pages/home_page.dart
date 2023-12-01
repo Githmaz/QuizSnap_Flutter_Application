@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widgets/parallelogram_button.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.onAction});
+  const HomePage({super.key, required this.startAction});
 
-  final Function(String value) onAction;
+  final Function(String value) startAction;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
         ParallelogramButton(
           label: 'Start Quiz',
           onPressed: () {
-            onAction('quiz');
+            startAction('quiz');
           },
           shape: "left-parallelogram",
           width: 180,

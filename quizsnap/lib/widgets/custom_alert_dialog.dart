@@ -35,10 +35,10 @@ class CustomAlertDialog extends StatelessWidget {
             : Container(),
         ElevatedButton(
             onPressed: () {
-              Navigator.pop(context);
               if (type == "Yes" && yesButton != null) {
                 yesButton!();
               }
+              Navigator.pop(context);
             },
             style: TextButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 4, 174, 46),

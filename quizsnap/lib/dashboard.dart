@@ -18,6 +18,7 @@ class _QuizState extends State<Dashboard> {
 //________ Update the active page based on user action ____//
 
   void onPageChange(String value) {
+    selectedAnswers.clear();
     setState(() {
       activePage = value;
     });
@@ -33,21 +34,11 @@ class _QuizState extends State<Dashboard> {
       });
     }
   }
+
   //________ Handle try again button  ____//
 
-  void onTryAgain(String value) {
-    setState(() {
-      selectedAnswers = [];
-    });
-  }
-
-  //________  ____//
-
-  void onRestart(String value) {
-    setState(() {
-      selectedAnswers = [];
-      activePage = value;
-    });
+  void onTryAgain() {
+    selectedAnswers.clear();
   }
 
   @override
@@ -56,7 +47,7 @@ class _QuizState extends State<Dashboard> {
 
     switch (activePage) {
       case 'home':
-        currentPage = HomePage(onAction: onPageChange);
+        currentPage = HomePage(startAction: onPageChange);
         break;
       case 'quiz':
         currentPage = QuizPage(
@@ -67,11 +58,10 @@ class _QuizState extends State<Dashboard> {
         break;
       case 'result':
         currentPage =
-            ResultPage(onAction: onRestart, answerList: selectedAnswers);
+            ResultPage(onAction: onPageChange, answerList: selectedAnswers);
         break;
       default:
-        currentPage =
-            const Center(child: Text("404 - Page Not found")); 
+        currentPage = const Center(child: Text("404 - Page Not found"));
         break;
     }
 
