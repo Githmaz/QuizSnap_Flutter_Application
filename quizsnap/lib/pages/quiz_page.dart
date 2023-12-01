@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:quizsnap/widgets/answer_button_widget.dart';
 import 'package:quizsnap/data/questions.dart';
+import 'package:quizsnap/widgets/custom_alert_dialog.dart';
 
 import '../widgets/parallelogram_button.dart';
 
 class QuizPage extends StatefulWidget {
-  const QuizPage({super.key, required this.onAnswer, required this.onAction});
+  
+  const QuizPage({
+    super.key,
+    required this.onAnswer,
+    required this.onBackToHome,
+    required this.onTryAgian,
+  });
 
   final Function(String value) onAnswer;
-  final Function(String value) onAction;
+  final Function(String value) onBackToHome;
+  final Function(String value) onTryAgian;
 
   @override
   State<QuizPage> createState() => _QuizPageState();
@@ -24,6 +32,12 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
+  void restartQuiz() {
+    setState(() {
+      currentQuestionIndex = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -34,9 +48,16 @@ class _QuizPageState extends State<QuizPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              questions[currentQuestionIndex].question,
+              "Q${currentQuestionIndex+1}) ${questions[currentQuestionIndex].question}",
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white, fontSize: 28),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontFamily:
+                    'YourCustomFont', // Change 'YourCustomFont' to the desired font family
+                fontWeight: FontWeight.bold,
+                // Add other styling properties as needed
+              ),
             ),
             const SizedBox(
               height: 40,
@@ -59,14 +80,60 @@ class _QuizPageState extends State<QuizPage> {
             const SizedBox(
               height: 40,
             ),
-            ParallelogramButton(
-              label: 'Back to Start',
-              onPressed: () {
-                widget.onAction('home');
-              },
-              side: "left",
-              width: 180,
-              buttonColor: const Color.fromARGB(255, 82, 78, 78),
+            Center(
+              child: Row(
+                children: [
+                  ParallelogramButton(
+                    label: 'Back to Home',
+                    onPressed: () {
+                      currentQuestionIndex > 0
+                          ? showDialog(
+                              context: context,
+                              builder: (context) => CustomAlertDialog(
+                                type: "Yes",
+                                alertTitle: "Confirm Navigation",
+                                alertContent:
+                                    "Are you sure you want to go back to the home screen? Your progress will be lost.",
+                                yesButton: () {
+                                  restartQuiz();
+                                  widget.onBackToHome('home');
+                                },
+                              ),
+                            )
+                          : widget.onBackToHome('home');
+                    },
+                    shape: currentQuestionIndex > 0
+                        ? "right-trapezoid"
+                        : "left-parallelogram",
+                    width: currentQuestionIndex > 0
+                        ? 180
+                        : MediaQuery.of(context).size.width * 0.9,
+                    buttonColor: const Color.fromARGB(255, 128, 126, 7),
+                  ),
+                  currentQuestionIndex > 0
+                      ? ParallelogramButton(
+                          label: 'Restart',
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => CustomAlertDialog(
+                                type: "Yes",
+                                alertTitle: "Restart Quiz",
+                                alertContent:
+                                    "Are you sure you want to restart the quiz? Your progress will be lost.",
+                                yesButton: () {
+                                  restartQuiz();
+                                },
+                              ),
+                            );
+                          },
+                          shape: "left-trapezoid",
+                          width: 180,
+                          buttonColor: const Color.fromARGB(255, 8, 121, 8),
+                        )
+                      : const SizedBox()
+                ],
+              ),
             ),
           ],
         ),

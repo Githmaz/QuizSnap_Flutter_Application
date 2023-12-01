@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/parallelogram_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -41,14 +41,18 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          const Text(
+          Text(
             'Let\'s embark on an exciting journey of quizzes and knowledge!',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontStyle: FontStyle.italic,
-              letterSpacing: 1.2,
+            style: GoogleFonts.varela(
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontStyle: FontStyle.italic,
+                letterSpacing: 1.2,
+                fontWeight:
+                    FontWeight.normal, // Adjust the font weight as needed
+              ),
             ),
           ),
           const SizedBox(height: 20),
@@ -57,8 +61,8 @@ class HomePage extends StatelessWidget {
             onPressed: () {
               onAction('quiz');
             },
-            side: "left",
-            width: 150,
+            shape: "left-parallelogram",
+            width: 180,
             buttonColor: Colors.blue,
           ),
         ],

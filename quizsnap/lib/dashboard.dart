@@ -33,13 +33,20 @@ class _QuizState extends State<Dashboard> {
       });
     }
   }
+  //________ Handle try again button  ____//
+
+ void onTryAgain(String value) {
+    setState(() {
+      selectedAnswers = [];
+    });
+  }
 
   //________  ____//
 
   void onRestart(String value) {
     setState(() {
       selectedAnswers = [];
-      activePage = value;
+      activePage = 'quiz';
     });
   }
 
@@ -52,7 +59,7 @@ class _QuizState extends State<Dashboard> {
         currentPage = HomePage(onAction: onPageChange);
         break;
       case 'quiz':
-        currentPage = QuizPage(onAnswer: onAnswerSelect, onAction: onPageChange);
+        currentPage = QuizPage(onAnswer: onAnswerSelect, onBackToHome: onPageChange , onTryAgian: onTryAgain,);
         break;
       case 'result':
         currentPage = ResultPage(onAction: onRestart, answerList: selectedAnswers);
