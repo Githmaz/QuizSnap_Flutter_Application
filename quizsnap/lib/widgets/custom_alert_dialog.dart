@@ -28,24 +28,27 @@ class CustomAlertDialog extends StatelessWidget {
                   backgroundColor: const Color.fromARGB(255, 228, 183, 79),
                   foregroundColor: const Color.fromARGB(255, 229, 228, 235),
                   textStyle: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 child: const Text('No'),
               )
             : Container(),
         ElevatedButton(
-            onPressed: () {
-              if (type == "Yes" && yesButton != null) {
-                yesButton!();
-              }
-              Navigator.pop(context);
-            },
-            style: TextButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 4, 174, 46),
-                foregroundColor: const Color.fromARGB(255, 229, 228, 235),
-                textStyle:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            child: Text(type)),
+          onPressed: () {
+            if (type == "Yes" && yesButton != null) {
+              yesButton!();
+            }
+            Navigator.pop(context);
+          },
+          style: TextButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 4, 174, 46),
+              foregroundColor: const Color.fromARGB(255, 229, 228, 235),
+              textStyle:
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          child: Text(type),
+        ),
       ],
     );
   }

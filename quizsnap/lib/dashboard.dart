@@ -75,11 +75,12 @@ class _QuizState extends State<Dashboard> {
           saveToHistory: saveResult,
         );
         break;
-      case 'history':currentPage = HistoryPage(
-    history: history,
-    onAction: onPageChange,
-    onClearHistory: clearHistory,
-  );
+      case 'history':
+        currentPage = HistoryPage(
+          history: history,
+          onAction: onPageChange,
+          onClearHistory: clearHistory,
+        );
         break;
       default:
         currentPage = const Center(child: Text("404 - Page Not found"));

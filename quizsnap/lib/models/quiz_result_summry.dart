@@ -1,4 +1,3 @@
-
 import 'package:quizsnap/widgets/results_summry_card.dart';
 
 class ResultSummaryModel {

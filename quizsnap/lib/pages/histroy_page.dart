@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizsnap/models/quiz_result_summry.dart';
+import 'package:quizsnap/widgets/custom_alert_dialog.dart';
 import 'package:quizsnap/widgets/parallelogram_button.dart';
 import 'package:quizsnap/widgets/results_summry_card.dart';
 
@@ -18,7 +19,7 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<ResultSummryCard> resultCards =
-        ResultSummaryModel.generateCards(history); // Generate result cards
+        ResultSummaryModel.generateCards(history);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -41,7 +42,7 @@ class HistoryPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // You can set the text color here
+                color: Colors.white,
               ),
             ),
           ),
@@ -56,8 +57,7 @@ class HistoryPage extends StatelessWidget {
               child: ListView.builder(
                 itemCount: resultCards.length,
                 itemBuilder: (context, index) {
-                  return resultCards[
-                      index]; // Use ResultSummryCard widget directly
+                  return resultCards[index];
                 },
               ),
             ),
@@ -83,8 +83,19 @@ class HistoryPage extends StatelessWidget {
                     : ParallelogramButton(
                         label: 'Clear History',
                         onPressed: () {
-                          onClearHistory();
-                          onAction('home');
+                          showDialog(
+                            context: context,
+                            builder: (context) => CustomAlertDialog(
+                              type: "Yes",
+                              alertTitle: "Warning",
+                              alertContent:
+                                  "This action will clear your quiz history. Are you sure?",
+                              yesButton: () {
+                                onClearHistory();
+                                onAction('home');
+                              },
+                            ),
+                          );
                         },
                         shape: "Square",
                         width: MediaQuery.of(context).size.width * 0.45,
@@ -98,15 +109,3 @@ class HistoryPage extends StatelessWidget {
     );
   }
 }
-
-// ElevatedButton(
-//             onPressed: () {
-//             },
-//             child: const Text('Back to Home'),
-//           ),
-//           ElevatedButton(
-//             onPressed: () {
-//               onClearHistory();
-//             },
-//             child: const Text('Clear History'),
-//           ),
