@@ -6,7 +6,6 @@ import 'package:quizsnap/widgets/custom_alert_dialog.dart';
 import '../widgets/parallelogram_button.dart';
 
 class QuizPage extends StatefulWidget {
-  
   const QuizPage({
     super.key,
     required this.onAnswer,
@@ -48,15 +47,13 @@ class _QuizPageState extends State<QuizPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Q${currentQuestionIndex+1}) ${questions[currentQuestionIndex].question}",
+              "Q${currentQuestionIndex + 1}) ${questions[currentQuestionIndex].question}",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 28,
-                fontFamily:
-                    'YourCustomFont', // Change 'YourCustomFont' to the desired font family
+                fontFamily: 'YourCustomFont',
                 fontWeight: FontWeight.bold,
-                // Add other styling properties as needed
               ),
             ),
             const SizedBox(
@@ -72,9 +69,7 @@ class _QuizPageState extends State<QuizPage> {
                         },
                         buttonColor: Colors.blue,
                       ),
-                      const SizedBox(
-                          height:
-                              10), // Adjust the spacing between AnswerButtons
+                      const SizedBox(height: 10),
                     ])
                 .expand((element) => element),
             const SizedBox(
@@ -82,6 +77,7 @@ class _QuizPageState extends State<QuizPage> {
             ),
             Center(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ParallelogramButton(
                     label: 'Back to Home',
@@ -90,15 +86,14 @@ class _QuizPageState extends State<QuizPage> {
                           ? showDialog(
                               context: context,
                               builder: (context) => CustomAlertDialog(
-                                type: "Yes",
-                                alertTitle: "Confirm Navigation",
-                                alertContent:
-                                    "Are you sure you want to go back to the home screen? Your progress will be lost.",
-                                yesButton: () {
-                                  restartQuiz();
-                                  widget.onBackToHome('home');
-                                },
-                              ),
+                                  type: "Yes",
+                                  alertTitle: "Confirm Navigation",
+                                  alertContent:
+                                      "Are you sure you want to go back to the home screen? Your progress will be lost.",
+                                  yesButton: () {
+                                    restartQuiz();
+                                    widget.onBackToHome('home');
+                                  }),
                             )
                           : widget.onBackToHome('home');
                     },
@@ -106,7 +101,7 @@ class _QuizPageState extends State<QuizPage> {
                         ? "right-trapezoid"
                         : "left-parallelogram",
                     width: currentQuestionIndex > 0
-                        ? 180
+                        ? MediaQuery.of(context).size.width * 0.45
                         : MediaQuery.of(context).size.width * 0.9,
                     buttonColor: const Color.fromARGB(255, 128, 126, 7),
                   ),
@@ -128,7 +123,7 @@ class _QuizPageState extends State<QuizPage> {
                             );
                           },
                           shape: "left-trapezoid",
-                          width: 180,
+                          width: MediaQuery.of(context).size.width * 0.45,
                           buttonColor: const Color.fromARGB(255, 8, 121, 8),
                         )
                       : const SizedBox()

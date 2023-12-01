@@ -55,17 +55,18 @@ class ParallelogramClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     Map<String, List<double>> shapes = {
-    'left-parallelogram': [0, width * 0.9, width,width * 0.1],
-    'right-parallelogram': [width * 0.1, width, width * 0.9, 0],
-    'left-trapezoid': [0, width*0.9, width , 0],
-    'right-trapezoid': [width*0.1 , width, width, 0],
-  };
+      'left-parallelogram': [0, width * 0.9, width, width * 0.1],
+      'right-parallelogram': [width * 0.1, width, width * 0.9, 0],
+      'left-trapezoid': [0, width * 0.9, width, 0],
+      'right-trapezoid': [width * 0.1, width, width, 0],
+      'Square': [0, width, width, 0]
+    };
 
     final path = Path()
       ..moveTo(shapes[shape]![0], 0)
       ..lineTo(shapes[shape]![1], 0)
-      ..lineTo(shapes[shape]![2], size.height) 
-      ..lineTo(shapes[shape]![3], size.height) 
+      ..lineTo(shapes[shape]![2], size.height)
+      ..lineTo(shapes[shape]![3], size.height)
       ..close();
     return path;
   }

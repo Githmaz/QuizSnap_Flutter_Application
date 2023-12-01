@@ -15,16 +15,15 @@ class QuizQuestionResult {
     required this.backgroundColor,
   });
 
-  static List<QuizQuestionResult> generateGroupModels(
+  static List<QuizQuestionResult> quizQuestionResultList(
       List<Map<String, String>> quizSummery) {
-    return quizSummery.map((summary) {
-      Color backgroundColor = Colors.grey;
+    return quizSummery.map((result) {
       return QuizQuestionResult(
-        question: summary["question"] ?? '',
-        correctAnswer: summary["correctAnswer"] ?? '',
-        userAnswer: summary["userAnswer"] ?? '',
-        userAsnwerIsCorrect: summary["correctAnswer"] == summary["userAnswer"],
-        backgroundColor: backgroundColor,
+        question: "${result['question']}",
+        correctAnswer: result['correct_answer'] as String,
+        userAnswer: result['user_answer'] as String,
+        userAsnwerIsCorrect: result['correct_answer'] == result['user_answer'],
+        backgroundColor: const Color.fromARGB(114, 58, 58, 58),
       );
     }).toList();
   }

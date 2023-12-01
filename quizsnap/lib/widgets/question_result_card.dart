@@ -28,6 +28,7 @@ class QuestionResultCard extends StatelessWidget {
               ),
             ),
           ),
+          
           // User's Answer
           ListTile(
             leading: result.userAsnwerIsCorrect
@@ -42,6 +43,7 @@ class QuestionResultCard extends StatelessWidget {
           ),
           !result.userAsnwerIsCorrect
               ?
+
               // Correct Answer
               ListTile(
                   leading: const Icon(Icons.beenhere, color: Colors.green),

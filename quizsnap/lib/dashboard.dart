@@ -5,7 +5,7 @@ import 'package:quizsnap/pages/quiz_page.dart';
 import 'package:quizsnap/pages/result_page.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  const Dashboard({super.key});
 
   @override
   State<Dashboard> createState() => _QuizState();
@@ -35,7 +35,7 @@ class _QuizState extends State<Dashboard> {
   }
   //________ Handle try again button  ____//
 
- void onTryAgain(String value) {
+  void onTryAgain(String value) {
     setState(() {
       selectedAnswers = [];
     });
@@ -46,7 +46,7 @@ class _QuizState extends State<Dashboard> {
   void onRestart(String value) {
     setState(() {
       selectedAnswers = [];
-      activePage = 'quiz';
+      activePage = value;
     });
   }
 
@@ -59,17 +59,23 @@ class _QuizState extends State<Dashboard> {
         currentPage = HomePage(onAction: onPageChange);
         break;
       case 'quiz':
-        currentPage = QuizPage(onAnswer: onAnswerSelect, onBackToHome: onPageChange , onTryAgian: onTryAgain,);
+        currentPage = QuizPage(
+          onAnswer: onAnswerSelect,
+          onBackToHome: onPageChange,
+          onTryAgian: onTryAgain,
+        );
         break;
       case 'result':
-        currentPage = ResultPage(onAction: onRestart, answerList: selectedAnswers);
+        currentPage =
+            ResultPage(onAction: onRestart, answerList: selectedAnswers);
         break;
       default:
-        currentPage = const Text("404 - Page Not found"); // Handle unknown pagxe
+        currentPage =
+            const Center(child: Text("404 - Page Not found")); 
         break;
     }
-    
-  return MaterialApp(
+
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
