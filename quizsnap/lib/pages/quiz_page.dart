@@ -23,12 +23,14 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   int currentQuestionIndex = 0;
 
+//______ add answers _____ //
   void answerQuestion(String answer) {
     widget.onAnswer(answer);
     currentQuestionIndex++;
     setState(() {});
   }
 
+//______  restart the quiz _____ //
   void restartQuiz() {
     currentQuestionIndex = 0;
     setState(() {

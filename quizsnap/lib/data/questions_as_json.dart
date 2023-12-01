@@ -3,6 +3,7 @@ import 'package:quizsnap/models/quiz_question.dart';
 
 List<QuizQuestion> questions = getQuestions();
 
+// getting the Question as a  list 
 List<QuizQuestion> getQuestions() {
   const jsonString = '''
     [
