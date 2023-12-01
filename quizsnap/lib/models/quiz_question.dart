@@ -9,7 +9,7 @@ class QuizQuestion {
 
   List<String> getRandomAnswers() {
     final randomAnswers = List.of(answers);
-    // randomAnswers.shuffle();
+    randomAnswers.shuffle();
     return randomAnswers;
   }
 }

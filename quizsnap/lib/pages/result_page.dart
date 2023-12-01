@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizsnap/data/questions.dart';
+import 'package:quizsnap/data/questions_as_json.dart';
 import 'package:quizsnap/widgets/parallelogram_button.dart';
 import 'package:quizsnap/widgets/results_summry_card.dart';
 import '../models/quiz_question_result.dart';
@@ -8,9 +8,13 @@ import '../widgets/question_result_card.dart';
 class ResultPage extends StatelessWidget {
   final List<String> answerList;
   final Function(String value) onAction;
+  final Function(double reslut) saveToHistory;
 
   const ResultPage(
-      {super.key, required this.answerList, required this.onAction});
+      {super.key,
+      required this.answerList,
+      required this.onAction,
+      required this.saveToHistory});
 
   List<Map<String, String>> calculateSummary() {
     List<Map<String, String>> summaryList = [];
@@ -29,7 +33,7 @@ class ResultPage extends StatelessWidget {
     int correctAnswers = summaryList
         .where((result) => result['correct_answer'] == result['user_answer'])
         .length;
-
+    saveToHistory((correctAnswers / answerList.length) * 100);
     return (correctAnswers / answerList.length) * 100;
   }
 

@@ -58,6 +58,14 @@ class HomePage extends StatelessWidget {
           shape: "left-parallelogram",
           width: 180,
           buttonColor: Colors.blue,
+        ), ParallelogramButton(
+          label: 'History',
+          onPressed: () {
+            startAction('history');
+          },
+          shape: "right-parallelogram",
+          width: 180,
+          buttonColor: Color.fromARGB(255, 132, 141, 5),
         ),
       ]),
     );

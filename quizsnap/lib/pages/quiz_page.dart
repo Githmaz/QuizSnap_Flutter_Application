@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quizsnap/data/questions_as_json.dart';
 import 'package:quizsnap/widgets/answer_button_widget.dart';
-import 'package:quizsnap/data/questions.dart';
 import 'package:quizsnap/widgets/custom_alert_dialog.dart';
-
 import '../widgets/parallelogram_button.dart';
 
 class QuizPage extends StatefulWidget {
@@ -47,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Q${currentQuestionIndex + 1}) ${questions[currentQuestionIndex].question}",
+              "Q${currentQuestionIndex + 1}) ${getQuestions()[currentQuestionIndex].question}",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,
@@ -59,7 +58,7 @@ class _QuizPageState extends State<QuizPage> {
             const SizedBox(
               height: 40,
             ),
-            ...questions[currentQuestionIndex]
+            ...getQuestions()[currentQuestionIndex]
                 .getRandomAnswers()
                 .map((answer) => [
                       AnswerButton(
@@ -104,7 +103,7 @@ class _QuizPageState extends State<QuizPage> {
                     width: currentQuestionIndex > 0
                         ? MediaQuery.of(context).size.width * 0.45
                         : MediaQuery.of(context).size.width * 0.9,
-                    buttonColor: const Color.fromARGB(255, 128, 126, 7),
+                    buttonColor: const Color.fromARGB(255, 182, 179, 4),
                   ),
                   currentQuestionIndex > 0
                       ? ParallelogramButton(
