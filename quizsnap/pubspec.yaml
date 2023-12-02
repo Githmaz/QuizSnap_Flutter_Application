@@ -21,5 +21,6 @@ flutter:
   uses-material-design: true
 
   assets:
+    - 'assets/data/questions_as_json.json'
     - 'assets/images/quizsanp_logo.png'
     - 'assets/images/home_page_background.png'
