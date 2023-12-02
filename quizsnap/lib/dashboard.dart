@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:quizsnap/data/questions_as_json.dart';
+import 'package:quizsnap/models/quiz_question.dart';
 import 'package:quizsnap/pages/histroy_page.dart';
 import 'package:quizsnap/pages/home_page.dart';
 import 'package:quizsnap/pages/quiz_page.dart';
 import 'package:quizsnap/pages/result_page.dart';
+import 'package:quizsnap/utility/util.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -15,7 +16,14 @@ class Dashboard extends StatefulWidget {
 class _QuizState extends State<Dashboard> {
   String activePage = 'home';
   List<String> selectedAnswers = [];
+  List<QuizQuestion> questionsList = [];
   List<double> history = [];
+
+  @override
+  initState() {
+    readJson(questionsList);
+    super.initState();
+  }
 
 //________ Update the active page based on user action ____//
 
@@ -30,7 +38,7 @@ class _QuizState extends State<Dashboard> {
 
   void onAnswerSelect(String answer) {
     selectedAnswers.add(answer);
-    if (selectedAnswers.length == questions.length) {
+    if (selectedAnswers.length == questionsList.length) {
       setState(() {
         activePage = 'result';
       });
@@ -48,7 +56,7 @@ class _QuizState extends State<Dashboard> {
     history.add(result);
   }
 
-  //________ Save Result to the Histroy ________//
+  //________ Clear the Histroy ________//
   void clearHistory() {
     history.clear();
   }
@@ -66,6 +74,7 @@ class _QuizState extends State<Dashboard> {
           onAnswer: onAnswerSelect,
           onBackToHome: onPageChange,
           onTryAgian: onTryAgain,
+          questionsList: questionsList,
         );
         break;
       case 'result':
@@ -73,6 +82,7 @@ class _QuizState extends State<Dashboard> {
           onAction: onPageChange,
           answerList: selectedAnswers,
           saveToHistory: saveResult,
+          questionsList: questionsList,
         );
         break;
       case 'history':

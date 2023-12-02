@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizsnap/data/questions_as_json.dart';
+import 'package:quizsnap/models/quiz_question.dart';
 import 'package:quizsnap/widgets/answer_button_widget.dart';
 import 'package:quizsnap/widgets/custom_alert_dialog.dart';
 import '../widgets/parallelogram_button.dart';
@@ -10,10 +10,12 @@ class QuizPage extends StatefulWidget {
     required this.onAnswer,
     required this.onBackToHome,
     required this.onTryAgian,
+    required this.questionsList,
   });
 
   final Function(String value) onAnswer;
   final Function(String value) onBackToHome;
+  final List<QuizQuestion> questionsList;
   final Function onTryAgian;
 
   @override
@@ -48,7 +50,7 @@ class _QuizPageState extends State<QuizPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Q${currentQuestionIndex + 1}) ${getQuestions()[currentQuestionIndex].question}",
+              "Q${currentQuestionIndex + 1}) ${widget.questionsList[currentQuestionIndex].question}",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,
@@ -60,7 +62,7 @@ class _QuizPageState extends State<QuizPage> {
             const SizedBox(
               height: 40,
             ),
-            ...getQuestions()[currentQuestionIndex]
+            ...widget.questionsList[currentQuestionIndex]
                 .getRandomAnswers()
                 .map((answer) => [
                       AnswerButton(
