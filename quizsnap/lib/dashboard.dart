@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:quizsnap/models/quiz_question.dart';
 import 'package:quizsnap/pages/histroy_page.dart';
 import 'package:quizsnap/pages/home_page.dart';
 import 'package:quizsnap/pages/quiz_page.dart';
 import 'package:quizsnap/pages/result_page.dart';
-import 'package:quizsnap/utility/util.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -21,10 +23,22 @@ class _QuizState extends State<Dashboard> {
 
   @override
   initState() {
-    readJson(questionsList);
+    readJson();
     super.initState();
   }
 
+  Future<void> readJson() async {
+    final String response =
+        await rootBundle.loadString('assets/data/questions_as_json.json');
+    final data = await json.decode(response);
+    setState(() {
+      for (var element in data["qestionAndAnswer"]) {
+        questionsList.add(QuizQuestion(
+            element["qestion"], List<String>.from(element["answers"])));
+      }
+    });
+    print("done");
+  }
 //________ Update the active page based on user action ____//
 
   void onPageChange(String value) {
