@@ -47,7 +47,7 @@ class ParallelogramButton extends StatelessWidget {
 }
 
 class ParallelogramClipper extends CustomClipper<Path> {
-  final String shape; 
+  final String shape;
   final double width;
 
   ParallelogramClipper({required this.shape, required this.width});

@@ -37,7 +37,6 @@ class _QuizState extends State<Dashboard> {
             element["qestion"], List<String>.from(element["answers"])));
       }
     });
-    print("done");
   }
 //________ Update the active page based on user action ____//
 

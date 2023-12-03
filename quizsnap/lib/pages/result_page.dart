@@ -11,7 +11,6 @@ class ResultPage extends StatelessWidget {
   final Function(double reslut) saveToHistory;
   final List<QuizQuestion> questionsList;
 
-
   const ResultPage({
     super.key,
     required this.answerList,
