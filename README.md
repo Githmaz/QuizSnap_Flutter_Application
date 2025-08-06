@@ -12,10 +12,27 @@ QuizSnap is a Flutter-based quiz application that provides a dynamic quiz experi
 - History Tracking
 - Pop-up Warning
 
-## How to Run
 
-Clone the repository, install dependencies, and run the app to start your quiz journey!
+## 🚀 How to Run
+1. **Install Flutter**  
+   Follow the official setup guide:  
+   👉 https://flutter.dev/
+2. **Clone the Repository**
 
+   ```bash
+   git clone https://github.com/Githmaz/QuizSnap_Flutter_Application.git
+   
+3. **Connect Your Device**
+   Make sure a physical device or emulator is running:
+   ```bash
+   flutter devices
+4. **Install Dependencies**
+   ```bash
+   flutter pub get
+5. **Run the App**
+   ```bash
+   flutter run
+   
 ## Screenshots
 
 <div align="center">
